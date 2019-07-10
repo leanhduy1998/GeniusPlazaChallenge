@@ -12,6 +12,7 @@ class MainTableViewCell: UITableViewCell {
     
     let imageview = UIImageView(frame: .zero)
     let nameLabel = UILabel(frame: .zero)
+    let activityIndicator = UIActivityIndicatorView(style: .gray)
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +21,21 @@ class MainTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(imageview)
+        contentView.addSubview(activityIndicator)
+        
         setupNameLabel()
         setupImageView()
+        setupActivityIndicator()
+    }
+    
+    private func setupActivityIndicator(){
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        activityIndicator.hidesWhenStopped = true
     }
     
     private func setupNameLabel(){
@@ -30,8 +44,6 @@ class MainTableViewCell: UITableViewCell {
         nameLabel.numberOfLines = 2
         nameLabel.adjustsFontSizeToFitWidth = true
         
-        
-        contentView.addSubview(nameLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         
         nameLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
@@ -40,8 +52,6 @@ class MainTableViewCell: UITableViewCell {
     }
     
     private func setupImageView(){
-        contentView.addSubview(imageview)
-        
         imageview.contentMode = .scaleAspectFit
         
         imageview.translatesAutoresizingMaskIntoConstraints = false
@@ -55,11 +65,4 @@ class MainTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

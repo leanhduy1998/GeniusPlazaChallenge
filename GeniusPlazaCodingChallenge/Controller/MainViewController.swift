@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     fileprivate let segmentedControl = UISegmentedControl(items: ["Music","Book"])
     fileprivate let tableview = UITableView(frame: .zero)
+    fileprivate let activityIndicator = UIActivityIndicatorView(style: .gray)
     
     private var topPadding:CGFloat = 0
     private var bottomPadding:CGFloat = 0
@@ -27,6 +28,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         addSegmentedControl()
         addTableView()
+        addActivityIndicator()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +43,14 @@ class MainViewController: UIViewController {
         tableview.register(MainTableViewCell.self, forCellReuseIdentifier: String(describing:MainTableViewCell.self))
     }
     
+    private func addActivityIndicator(){
+        view.addSubview(activityIndicator)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.hidesWhenStopped = true
+    }
+    
     private func addSegmentedControl(){
         view.addSubview(segmentedControl)
         segmentedControl.selectedSegmentIndex = 0
@@ -50,6 +60,7 @@ class MainViewController: UIViewController {
     
     @objc private func segmentedControlValueChanged(){
         imageCache.removeAll()
+        activityIndicator.startAnimating()
         if segmentedControl.selectedSegmentIndex == 0{
             ituneService.fetchMusic(success: {[weak self] (items) in
                 guard let strongself = self else{ return}
@@ -57,12 +68,14 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     strongself.musics = items
                     strongself.tableview.reloadData()
+                    strongself.activityIndicator.stopAnimating()
                 }
                 
             }) {[weak self] (errorString) in
                 guard let strongself = self else{ return}
                 DispatchQueue.main.async {
                     strongself.showErrorAlert(error: errorString)
+                    strongself.activityIndicator.stopAnimating()
                 }
             }
         }
@@ -73,12 +86,14 @@ class MainViewController: UIViewController {
                 DispatchQueue.main.async {
                     strongself.books = items
                     strongself.tableview.reloadData()
+                    strongself.activityIndicator.stopAnimating()
                 }
                 
             }) {[weak self] (errorString) in
                 guard let strongself = self else{ return}
                 DispatchQueue.main.async {
                     strongself.showErrorAlert(error: errorString)
+                    strongself.activityIndicator.stopAnimating()
                 }
             }
         }
@@ -122,6 +137,20 @@ class MainViewController: UIViewController {
 extension MainViewController:UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if(segmentedControl.selectedSegmentIndex == 0){
+            if( musics.count > 0){
+                return 1
+            }
+        }
+        else{
+            if( books.count > 0){
+                return 1
+            }
+        }
+        return 0
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if(segmentedControl.selectedSegmentIndex == 0){
             return musics.count
         }
         else{
@@ -139,17 +168,27 @@ extension MainViewController:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let cell = cell as? MainTableViewCell{
+            cell.imageview.image = UIImage()
+            cell.activityIndicator.startAnimating()
+            
             var item:Item!
             if(segmentedControl.selectedSegmentIndex == 0){
-                item = musics[indexPath.row]
+                if(indexPath.section > musics.count-1){
+                    return
+                }
+                item = musics[indexPath.section]
             }
             else{
-                item = books[indexPath.row]
+                if(indexPath.section > books.count-1){
+                    return
+                }
+                item = books[indexPath.section]
             }
             cell.nameLabel.text = item.name
             
             if(imageCache[item.imageUrl] != nil){
                 cell.imageview.image = UIImage( data:imageCache[item.imageUrl]!)
+                cell.activityIndicator.stopAnimating()
             }
             else{
                 guard let url = URL(string: item.imageUrl) else{
@@ -161,22 +200,35 @@ extension MainViewController:UITableViewDelegate, UITableViewDataSource{
                         DispatchQueue.main.async {
                             cell.imageview.image = UIImage( data:data)
                             self.imageCache[item.imageUrl] = data
+                            cell.activityIndicator.stopAnimating()
                         }
                     }
                 }
             }
-            
-            
         }
-        
-        
-        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height/3
+        switch UIDevice.current.orientation{
+        case .portrait:
+            return view.frame.height/3
+        case .portraitUpsideDown:
+            return view.frame.height/3
+        case .landscapeLeft:
+            return view.frame.width*2/3
+        case .landscapeRight:
+            return view.frame.width*2/3
+        default:
+            return view.frame.height/3
+        }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
+    }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
 

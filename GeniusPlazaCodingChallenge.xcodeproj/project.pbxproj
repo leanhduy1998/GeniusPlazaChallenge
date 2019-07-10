@@ -13,6 +13,11 @@
 		1C2F292F22D652330085F49B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1C2F292D22D652330085F49B /* LaunchScreen.storyboard */; };
 		1C2F293A22D652330085F49B /* GeniusPlazaCodingChallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F293922D652330085F49B /* GeniusPlazaCodingChallengeTests.swift */; };
 		1C2F294522D652330085F49B /* GeniusPlazaCodingChallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F294422D652330085F49B /* GeniusPlazaCodingChallengeUITests.swift */; };
+		1C2F295822D653340085F49B /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295722D653340085F49B /* NetworkService.swift */; };
+		1C2F295B22D6536C0085F49B /* ITunesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295A22D6536C0085F49B /* ITunesService.swift */; };
+		1C2F295D22D653990085F49B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295C22D653990085F49B /* Item.swift */; };
+		1C2F295F22D653A90085F49B /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295E22D653A90085F49B /* MediaType.swift */; };
+		1C2F296122D653C30085F49B /* ITunesJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F296022D653C30085F49B /* ITunesJSONMapper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		1C2F294022D652330085F49B /* GeniusPlazaCodingChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeniusPlazaCodingChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C2F294422D652330085F49B /* GeniusPlazaCodingChallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeniusPlazaCodingChallengeUITests.swift; sourceTree = "<group>"; };
 		1C2F294622D652330085F49B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1C2F295722D653340085F49B /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1C2F295A22D6536C0085F49B /* ITunesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesService.swift; sourceTree = "<group>"; };
+		1C2F295C22D653990085F49B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		1C2F295E22D653A90085F49B /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
+		1C2F296022D653C30085F49B /* ITunesJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesJSONMapper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +110,7 @@
 				1C2F295222D652AB0085F49B /* Model */,
 				1C2F295322D652B20085F49B /* View */,
 				1C2F295422D652B70085F49B /* Controller */,
+				1C2F295622D6531D0085F49B /* Network */,
 				1C2F293022D652330085F49B /* Info.plist */,
 			);
 			path = GeniusPlazaCodingChallenge;
@@ -126,6 +137,8 @@
 		1C2F295222D652AB0085F49B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1C2F295C22D653990085F49B /* Item.swift */,
+				1C2F295E22D653A90085F49B /* MediaType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -152,6 +165,24 @@
 				1C2F292B22D652330085F49B /* Assets.xcassets */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		1C2F295622D6531D0085F49B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1C2F295A22D6536C0085F49B /* ITunesService.swift */,
+				1C2F295922D6534B0085F49B /* Backend */,
+				1C2F296022D653C30085F49B /* ITunesJSONMapper.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1C2F295922D6534B0085F49B /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				1C2F295722D653340085F49B /* NetworkService.swift */,
+			);
+			path = Backend;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -284,8 +315,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C2F295F22D653A90085F49B /* MediaType.swift in Sources */,
+				1C2F295D22D653990085F49B /* Item.swift in Sources */,
+				1C2F296122D653C30085F49B /* ITunesJSONMapper.swift in Sources */,
 				1C2F292722D652320085F49B /* MainViewController.swift in Sources */,
+				1C2F295822D653340085F49B /* NetworkService.swift in Sources */,
 				1C2F292522D652320085F49B /* AppDelegate.swift in Sources */,
+				1C2F295B22D6536C0085F49B /* ITunesService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@
 		1C2F295D22D653990085F49B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295C22D653990085F49B /* Item.swift */; };
 		1C2F295F22D653A90085F49B /* MediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F295E22D653A90085F49B /* MediaType.swift */; };
 		1C2F296122D653C30085F49B /* ITunesJSONMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F296022D653C30085F49B /* ITunesJSONMapper.swift */; };
+		1C2F296322D659A10085F49B /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2F296222D659A10085F49B /* MainTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		1C2F295C22D653990085F49B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		1C2F295E22D653A90085F49B /* MediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaType.swift; sourceTree = "<group>"; };
 		1C2F296022D653C30085F49B /* ITunesJSONMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ITunesJSONMapper.swift; sourceTree = "<group>"; };
+		1C2F296222D659A10085F49B /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				1C2F292D22D652330085F49B /* LaunchScreen.storyboard */,
+				1C2F296222D659A10085F49B /* MainTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 			files = (
 				1C2F295F22D653A90085F49B /* MediaType.swift in Sources */,
 				1C2F295D22D653990085F49B /* Item.swift in Sources */,
+				1C2F296322D659A10085F49B /* MainTableViewCell.swift in Sources */,
 				1C2F296122D653C30085F49B /* ITunesJSONMapper.swift in Sources */,
 				1C2F292722D652320085F49B /* MainViewController.swift in Sources */,
 				1C2F295822D653340085F49B /* NetworkService.swift in Sources */,
